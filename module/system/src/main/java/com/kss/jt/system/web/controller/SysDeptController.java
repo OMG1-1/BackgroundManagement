@@ -32,9 +32,4 @@ public class SysDeptController {
         sysDeptService.insertDept(entity);
         return new JsonResult("save ok");
     }
-
-
-
-
-
 }
