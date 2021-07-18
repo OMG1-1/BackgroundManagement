@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.kss.jt.system.Dao.SysDeptDao">
+    <insert id="insertDept">
+        insert into sys_depts
+        (name,sort,remark,parentId,
+         createdTime,modifiedTime,createdUser,modifiedUser)
+        values
+        (#{name},#{sort},#{remark},#{parentId},
+         now(),now(),#{createdUser},#{modifiedUser})
+    </insert>
+    <update id="updateDept">
+        update sys_depts
+        set
+        name=#{name},
+        sort=#{sort},
+        remark=#{remark},
+        parentId=#{parentId},
+        modifiedUser=#{modifiedUser},
+        modifiedTime=now()
+        <where>id=#{id}</where>
+    </update>
+
+    <sql id="selectDept*">
+        select id,name,parentId,sort,remark,createdTime,modifiedTime,createdUser,modifiedUser
+        from sys_depts
+    </sql>
+
+    <select id="selectById" resultType="com.kss.jt.system.domain.SysDept">
+        <include refid="selectDept*"/>
+        where id = #{id}
+    </select>
+</mapper>
